@@ -208,7 +208,6 @@ Acknowledgments
 
 Dataset: SMS Spam Collection Dataset
 Libraries: Pandas, NLTK, Scikit-learn, Matplotlib, Seaborn
-Built with guidance from xAI’s Grok 3
 
 
 
