@@ -1,213 +1,220 @@
-Spam SMS Detection
-This project implements a machine learning model to classify SMS messages as spam or ham (non-spam) using the Kaggle SMS Spam Collection Dataset. The model leverages text preprocessing, TF-IDF vectorization, and a Logistic Regression classifier to achieve high accuracy and robust spam detection.
-Project Overview
 
-Objective: Build a machine learning model to detect spam SMS messages with high accuracy and F1-score.
-Dataset: Kaggle SMS Spam Collection Dataset (spam.csv), containing 5,572 SMS messages labeled as ham (86.6%) or spam (13.4%).
-Technologies: Python, Pandas, NLTK, Scikit-learn, Matplotlib, Seaborn.
-Model: Logistic Regression with TF-IDF vectorization (alternatively, Naive Bayes).
-Performance:
-Accuracy: ~98%
-F1-Score: ~94%
-Precision: ~95–99%
-Recall: ~92–95%
+# 📱 Spam SMS Detection
 
+A machine learning project that classifies SMS messages as spam or ham using text preprocessing, TF-IDF vectorization, and Logistic Regression. Built using the [SMS Spam Collection Dataset](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset).
 
+---
 
-Features
+## 📌 Project Overview
 
-Preprocesses text by removing punctuation, stopwords, and applying stemming.
-Uses TF-IDF vectorization with bigrams for feature extraction.
-Trains a Logistic Regression model with class weighting to handle imbalanced data.
-Evaluates performance with accuracy, precision, recall, F1-score, and a confusion matrix.
-Saves a confusion matrix visualization as confusion_matrix.png.
-Includes a prediction function for new SMS messages.
+- **🎯 Objective:** Detect spam SMS messages with high accuracy and F1-score.
+- **📊 Dataset:** Kaggle SMS Spam Collection — 5,572 messages (86.6% ham, 13.4% spam).
+- **⚙️ Technologies:** Python, Pandas, NLTK, Scikit-learn, Matplotlib, Seaborn.
+- **🧠 Model:** Logistic Regression with TF-IDF (alternatively, Naive Bayes).
+- **📈 Performance:**
+  - Accuracy: ~98%
+  - F1-Score: ~94%
+  - Precision: ~95–99%
+  - Recall: ~92–95%
 
-Prerequisites
+---
 
-Python 3.8 or higher
+## ✅ Features
 
-Required Python libraries:
+- Preprocesses text: removes punctuation, stopwords, and applies stemming.
+- Uses TF-IDF with bigrams for feature extraction.
+- Trains a Logistic Regression model with class balancing.
+- Evaluates model with:
+  - Accuracy
+  - Precision
+  - Recall
+  - F1-score
+  - Confusion matrix (saved as `confusion_matrix.png`)
+- Predicts new SMS messages using a built-in function.
+
+---
+
+## 🧱 Prerequisites
+
+- **Python 3.8+**
+
+Install dependencies:
+```bash
 pip install pandas numpy nltk scikit-learn matplotlib seaborn
+```
 
+---
 
-Kaggle SMS Spam Collection Dataset (spam.csv)
+## 📦 Dataset
 
+Download `spam.csv` from [Kaggle](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset)  
+Place it in your project directory (e.g., `D:\spam_sms\`).
 
-Setup Instructions
+---
 
-Clone or Download the Project:
+## ⚙️ Setup Instructions
 
-Clone this repository or download the project files to your local machine.
-Ensure you’re in the project directory (e.g., D:\spam_sms).
+### Clone or Download the Project
 
+```bash
+git clone https://github.com/Raazabhiabhishek/Spamsms.git
+cd spam_sms
+```
 
-Install Dependencies:
+### Install Dependencies
+
+```bash
 pip install pandas numpy nltk scikit-learn matplotlib seaborn
+```
 
+### Download NLTK Resources (if not already downloaded)
 
-Download NLTK Resources:
-
-The script automatically downloads required NLTK resources (punkt, punkt_tab, stopwords). If issues arise, run manually:
+```python
 import nltk
 nltk.download('punkt')
-nltk.download('punkt_tab')
 nltk.download('stopwords')
+```
 
+### Run the Script
 
-
-
-Download the Dataset:
-
-Download spam.csv from Kaggle.
-Place spam.csv in the project directory (e.g., D:\spam_sms).
-
-
-Run the Script:
-cd D:\spam_sms
+```bash
 python spam_sms_detection_improved.py
+```
 
+---
 
+## 🧪 Usage & Output
 
-Usage
+Run the script:
 
-Running the Model:
-
-Execute the script to load the dataset, train the model, evaluate performance, and generate predictions:
+```bash
 python spam_sms_detection_improved.py
+```
 
+Expected console output:
 
-Expected Output:
+```
 Dataset loaded. Shape: (5572, 2)
 Label distribution:
 0    4825
 1     747
-Name: label, dtype: int64
+...
 
-Model Evaluation (Logistic Regression):
+Model Evaluation:
 Accuracy: 0.9820
 Precision: 0.9565
 Recall: 0.9262
 F1-Score: 0.9412
 
 Confusion matrix saved as 'confusion_matrix.png'
+```
 
-Example Predictions:
-Text: Free entry in 2 a weekly comp to win FA Cup final... -> Predicted: Spam
+Example predictions:
+
+```
+Text: Free entry in 2 a weekly comp to win FA Cup final... -> Predicted: Spam  
 Text: Hey, are we still meeting for lunch tomorrow?... -> Predicted: Ham
+```
 
+---
 
+## 📂 Output Files
 
+- `confusion_matrix.png` – visual representation of model performance.
+- `spam_detector_model.pkl` – saved trained model (optional).
+- `tfidf_vectorizer.pkl` – saved vectorizer (optional).
 
-Output Files:
+---
 
-confusion_matrix.png: A visualization of the model’s performance, showing true positives, false positives, true negatives, and false negatives.
+## 🔍 Predict New SMS
 
+In the script:
 
-Predicting New SMS:
-
-Modify the sample_texts list in the script to test new messages:
+```python
 sample_texts = ["Your new SMS here"]
+```
 
+Or use saved model:
 
-Alternatively, save and load the model for predictions:
+```python
 import joblib
 model = joblib.load('spam_detector_model.pkl')
 vectorizer = joblib.load('tfidf_vectorizer.pkl')
+```
 
+---
 
+## 📊 Results
 
+- **Accuracy:** ~98%
+- **F1-score:** ~94%
+- **Precision:** ~95–99% (low false positives)
+- **Recall:** ~92–95% (low false negatives)
 
+Confusion Matrix Interpretation (see `confusion_matrix.png`):
 
-Results
+- **Top-left:** True Negatives (Ham predicted correctly)  
+- **Top-right:** False Positives (Ham predicted as Spam)  
+- **Bottom-left:** False Negatives (Spam predicted as Ham)  
+- **Bottom-right:** True Positives (Spam predicted correctly)
 
-Model Performance:
+---
 
-Achieves ~98% accuracy and ~94% F1-score, competitive with state-of-the-art text classification models.
-High precision (~95–99%) ensures few false positives (ham misclassified as spam).
-Improved recall (~92–95%) reduces false negatives (missed spam messages).
+## 📁 Project Structure
 
-
-Confusion Matrix:
-
-Visualize confusion_matrix.png to inspect model performance:
-Top-left: True Negatives (Ham correctly predicted)
-Top-right: False Positives (Ham predicted as Spam)
-Bottom-left: False Negatives (Spam predicted as Ham)
-Bottom-right: True Positives (Spam correctly predicted)
-
-
-
-
-
-Project Structure
+```
 D:\spam_sms\
-│── spam_sms_detection_improved.py  # Main script
-│── spam.csv                       # Dataset
-│── confusion_matrix.png           # Output visualization
-│── README.md                      # This file
+├── spam_sms_detection_improved.py   # Main script
+├── spam.csv                         # Dataset
+├── confusion_matrix.png             # Output visualization
+└── README.md                        # This file
+```
 
-Improvements and Future Work
+---
 
-Hyperparameter Tuning:
-Use GridSearchCV to optimize Logistic Regression parameters (e.g., C, solver).
+## 🚀 Future Improvements
 
+- 🔧 **Hyperparameter Tuning:** Use `GridSearchCV` to optimize model.
+- 🧠 **Alternative Models:** Try SVM, Random Forest, etc.
+- 🌐 **Deployment:**
+  - Create a Flask API:
+    ```bash
+    pip install flask
+    python api.py
+    ```
+  - Integrate with web/mobile UI
+- 📈 **Data Augmentation:**
+  - Use SMOTE to balance classes
+  - Add more datasets for improved generalization
 
-Alternative Models:
-Experiment with Support Vector Machines (SVM) or Random Forests for potentially better performance.
+---
 
+## 🚼 Troubleshooting
 
-Deployment:
-Create a Flask API to serve predictions:
-pip install flask
-python api.py
+- **File Not Found:** Ensure `spam.csv` is in the working directory.
+- **NLTK Errors:** Run `nltk.download('all')` to fetch missing resources.
+- **Dependency Issues:** Recheck installations with:
+  ```bash
+  pip show pandas numpy nltk scikit-learn matplotlib seaborn
+  ```
+- **Low Performance:** Increase `max_features` in TF-IDF or try SVM.
 
+---
 
-Integrate with a web or mobile app for real-time spam detection.
+## 🤝 Contributing
 
+Contributions are welcome!  
+Fork this repo, open issues, or submit PRs to improve the model or docs.
 
+---
 
-Dataset Augmentation:
-Use oversampling (e.g., SMOTE) to address class imbalance.
-Incorporate additional SMS datasets for robustness.
+## 🪖 License
 
+This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for details.
 
+---
 
-Troubleshooting
+## 🙏 Acknowledgments
 
-File Not Found:
-Ensure spam.csv is in the project directory (D:\spam_sms).
-Check the file name and path in load_data(file_path='spam.csv').
-
-
-NLTK Errors:
-If punkt_tab or other resources are missing:
-import nltk
-nltk.download('all')
-
-
-
-
-Dependency Issues:
-Verify all libraries are installed:
-pip show pandas numpy nltk scikit-learn matplotlib seaborn
-
-
-
-
-Low Performance:
-If accuracy or F1-score is below expectations, try increasing max_features or switching to SVM.
-
-
-
-Contributing
-Feel free to fork this project, submit issues, or create pull requests to enhance the model, add features, or improve documentation.
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-Acknowledgments
-
-Dataset: SMS Spam Collection Dataset
-Libraries: Pandas, NLTK, Scikit-learn, Matplotlib, Seaborn
-
-
-
+- **Dataset:** [SMS Spam Collection Dataset](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset)
+- **Libraries:** Pandas, NLTK, Scikit-learn, Matplotlib, Seaborn
